@@ -26,4 +26,12 @@ public class BowlingGameTest {
         assertEquals(77, score);
     }
 
+    @Test
+    void should_return_sum_number_when_getscore_given_with_stike_and_spare_except_10thFrame() {
+        String hitPin[] = {"1/1","1/1","Strike/null","Strike/null","Strike/null","1/Spare","Strike/null","1/1","1/1","1/1"};
+        BowlingGame bowlingGame = new BowlingGame();
+        int score = bowlingGame.getScore(hitPin);
+        assertEquals(113, score);
+    }
+
 }
