@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class BowlingGame {
     public int getScore(String[] hitPin) {
         int score = 0;
-        for (int i = 0; i < hitPin.length; ++i) {
+        for (int i = 0; i < 10; ++i) {
             String oneFrameHit = hitPin[i];
             String[] oneTimeHit = oneFrameHit.split("/");
             if(!isStrike(oneTimeHit[0]) && !isSpare(oneTimeHit[1])) {
