@@ -6,26 +6,38 @@ public class BowlingGame {
         for (int i = 0; i < hitPin.length; ++i) {
             String oneFrameHit = hitPin[i];
             String[] oneTimeHit = oneFrameHit.split("/");
-            if(!oneTimeHit[0].equals("Strike") && !oneTimeHit[1].equals("Strike")) {
-                int first = Integer.parseInt(oneTimeHit[0]);
-                int second = Integer.parseInt(oneTimeHit[1]);
-                score = score + first + second;
+            if(!isStrike(oneTimeHit[0]) && !isStrike(oneTimeHit[1])) {
+                score = score + getOneTimeScore(oneTimeHit);
             } else {
                 String nextHit = hitPin[i + 1];
                 oneTimeHit = nextHit.split("/");
-                if (oneTimeHit[0].equals("Strike")) {
-                    nextHit = hitPin[i + 2];
-                    oneTimeHit = nextHit.split("/");
-                    if(oneTimeHit[0].equals("Strike")) {
-                        score = score + 30;
-                    } else {
-                        score = score + 20 + Integer.parseInt(oneTimeHit[0]);
-                    }
+                if (isStrike(oneTimeHit[0])) {
+                    score = score + 20+ getOneScore(hitPin[i + 2].split("/"));
                 } else {
-                    score = score + 10 + getScore(new String[]{nextHit});
+                    score = score + 10 + getOneTimeScore(oneTimeHit);
                 }
             }
         }
         return score;
+    }
+
+    private boolean isStrike(String hit) {
+        if(hit.equals("Strike"))
+            return true;
+        else
+            return false;
+    }
+
+    private int getOneTimeScore(String[] oneTimeHit) {
+        int first = Integer.parseInt(oneTimeHit[0]);
+        int second = Integer.parseInt(oneTimeHit[1]);
+        return first + second;
+    }
+
+    private int getOneScore(String[] oneTimeHit) {
+        if(isStrike(oneTimeHit[0]))
+            return 10;
+        else
+            return Integer.parseInt(oneTimeHit[0]);
     }
 }
